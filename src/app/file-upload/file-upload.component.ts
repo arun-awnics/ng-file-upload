@@ -32,18 +32,17 @@ export class FileUploadComponent {
     this._control.setValue(null);
 
     this.fileService.uploadAndProgress(files)
-      .subscribe(event => {
+    .subscribe(event => {
         if (event.type === HttpEventType.UploadProgress) {
           this.progress = this.fileService.calcProgressPercent(event);
-        } else if (event instanceof HttpResponse) {
+        } else if (event instanceof HttpResponse) {  
 
+          console.log('File is uploaded Successfully');
+          
           // the actual should be returned as something like
-          // this._control.setValue(event.body.url)   
-          console.log('event ', JSON.stringify(event));     
-          this._control.setValue(event.body.link);
-          console.log('url: ', event.body.link);
-          //this.imgUrl = event.body.link;
+          // this._control.setValue(event.body.url)        
+          this._control.setValue('some url') 
         }
-      });
+    });
   }
 }
